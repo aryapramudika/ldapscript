@@ -1,0 +1,2 @@
+# ldapscript
+LDAP Script Bash
