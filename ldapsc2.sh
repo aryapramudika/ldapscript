@@ -14,3 +14,7 @@ echo "mail: localuser$i@itnsaskills.cloud" >> file.ldif
 echo "loginShell: /bin/bash" >> file.ldif
 echo "userPassword: password_string" >>file.ldif
 done
+
+# after this :
+# 1. Run this script
+# 2. ldapadd -W -x -D "cn=admin,dc=itnsaskills,dc=cloud" -f file.ldif
