@@ -1,23 +1,20 @@
 #!/bin/bash
 
-USERNAME="localuser"
-LDIF="/root/test.ldif"
-DN="cn=admin,dc=itnsaskills,dc=cloud"
-PASSWD="Skill39"
-OU="MISC"
-
-ldapadd -xD $DN -f $LDIF -w $PASSWD
 for i in {22..23}; do
-echo "dn: cn=localuser$i,ou=$OU,dc=itnsaskills,dc=cloud" > $LDIF
-echo "objectClass: inetOrgPerson" >> $LDIF
-echo "objectClass: posixAccount" >> $LDIF
-echo "objectClass: shadowAccount" >> $LDIF
-echo "uid: $USERNAME$i" >> $LDIF
-echo "homeDirectory: /home/localuser$i" >> $LDIF
-echo "sn: USERNAME$i" >> $LDIF
-echo "uidNumber: 100$i" >> $LDIF
-echo "gidNumber: 100$i" >> $LDIF
-echo "mail: $USERNAME$i@itnsaskills.cloud" >> $LDIF
-echo "loginShell: /bin/bash" >> $LDIF
-echo "userPassword: {SSHA}$PASSWD" >> $LDIF
+echo "dn: uid=localuser$i,ou=$OU,dc=itnsaskills,dc=cloud" >> file.ldif
+echo "objectClass: inetOrgPerson" >> file.ldif
+echo "objectClass: posixAccount" >> file.ldif
+echo "objectClass: shadowAccount" >> file.ldif
+echo "cn: localuser$i" >> file.ldif
+echo "sn: localuser$i" >> file.ldif
+echo "uidNumber: 200$i" >> file.ldif
+echo "gidNumber: 200$i" >> file.ldif
+echo "homeDirectory: /home/localuser$i" >> file.ldif
+echo "mail: localuser$i@itnsaskills.cloud" >> file.ldif
+echo "loginShell: /bin/bash" >> file.ldif
+echo "userPassword: password_string" >>file.ldif
 done
+
+# after this :
+# 1. Run this script
+# 2. ldapadd -W -x -D "cn=admin,dc=itnsaskills,dc=cloud" -f file.ldif
